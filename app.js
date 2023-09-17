@@ -1,7 +1,17 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+// mongoose.connect('mongodb+srv://<atlas db username>:<atlas pswd>@127.0.0.1:27018/?directConnection=false&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.6')
+mongoose.connect('mongodb://127.0.0.1:27018/mystuff')
+.then(() => {
+    console.log('Successfully connected to MongoDB Community Server!');
+})
+.catch((error) => {
+    console.log('Unable to connect to MongoDB Community Server!');
+    console.error(error);
+});
 
 app.use(express.json());
 
