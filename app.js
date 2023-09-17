@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Thing = require('./models/thing');
 
 const app = express();
 
@@ -23,8 +24,23 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/stuff', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({message: 'Thing created successfully!'});
+    // console.log(req.body); // before implementing Thing model
+    // res.status(201).json({message: 'Thing created successfully!'}); // before implementing Thing model
+    const thing = new Thing({
+        title: req.body.title,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+        userId: req.body.userId,
+        price: req.body.price
+    });
+
+    thing.save()
+    .then( () => {
+        res.status(201).json({message: 'Post saved successfully!'});
+    })
+    .catch( (error) => {
+        res.status(400).json({error: error});
+    });
 });
 
 app.get('/api/stuff', (req, res, next) => {
