@@ -79,7 +79,7 @@ app.get('/api/stuff/:id', (req, res, next) => {
     });
 });
 
-// Update an Existing Thing
+// Updating an Existing Thing
 app.put('/api/stuff/:id', (req, res, next) => {
     const thing = new Thing({
         _id: req.params.id,
@@ -93,6 +93,17 @@ app.put('/api/stuff/:id', (req, res, next) => {
     Thing.updateOne({_id: req.params.id}, thing)
     .then( () => {
         res.status(201).json({message: 'Thing updated succesfully!'});
+    })
+    .catch( (error) => {
+        res.status(400).json({error: error});
+    });
+});
+
+// Deleting an Existing Thing
+app.delete('/api/stuff/:id', (req, res, next) => {
+    Thing.deleteOne({_id: req.params.id})
+    .then( () => {
+        res.status(200).json({message: 'Deleted!'});
     })
     .catch( (error) => {
         res.status(400).json({error: error});
