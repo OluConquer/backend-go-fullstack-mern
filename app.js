@@ -42,7 +42,7 @@ mongoose.connect('mongodb+srv://oluconquer:kFnpRl3DhSFIUbK5@oluconquer.jyksbsn.m
     console.error(error);
 });
   
-
+// Saving Things for sale  to the Database
 app.post('/api/stuff', (req, res, next) => {
     // console.log(req.body); // before implementing Thing model
     // res.status(201).json({message: 'Thing created successfully!'}); // before implementing Thing model
@@ -66,6 +66,20 @@ app.post('/api/stuff', (req, res, next) => {
     }
     );
 });
+
+// Retrieving a Specific Thing
+
+app.get('/api/stuff/:id', (req, res, next) => {
+    Thing.findOne({_id: req.params.id})
+    .then((thing) => {
+        res.status(200).json(thing);
+    })
+    .catch((error) => {
+        res.status(404).json({error: error});
+    });
+});
+
+// Retrieving the List of all Things for Sale
 
 // app.use('/api/stuff', (req, res, next) => { /* THIS LINE CAUSED CORS ERRORS THAT TOOK A WHOLE DAY TO DEBUG */
 app.get('/api/stuff', (req, res, next) => {
