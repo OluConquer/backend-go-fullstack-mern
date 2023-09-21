@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -25,6 +26,10 @@ mongoose.connect('mongodb+srv://oluconquer:kFnpRl3DhSFIUbK5@oluconquer.jyksbsn.m
     console.error(error);
 });
 
+// register stuff router with app
 app.use('/api/stuff', stuffRoutes);
+
+// register user authentication router app
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
