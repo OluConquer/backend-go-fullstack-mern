@@ -2,17 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer');
 
 const stuffCtrl = require('../controllers/stuff');
 
 // Retrieving the List of all Things for Sale
-router.get('/', stuffCtrl.getAllStuff);
+router.get('/', auth, stuffCtrl.getAllStuff);
 
 // Saving Things for sale  to the Database
-router.post('/', auth, stuffCtrl.createThing), 
+router.post('/', auth, multer, stuffCtrl.createThing), 
 
 // Retrieving a Specific Thing
-router.get('/:id', stuffCtrl.getOneThing);
+router.get('/:id', auth, stuffCtrl.getOneThing);
 
 // Updating an Existing Thing
 router.put('/:id', auth, stuffCtrl.modifyThing);
