@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
+const path = require('path');
 
 const app = express();
 
@@ -25,6 +26,9 @@ mongoose.connect('mongodb+srv://oluconquer:kFnpRl3DhSFIUbK5@oluconquer.jyksbsn.m
     console.log('Unable to connect to MongoDB Community Atlas!');
     console.error(error);
 });
+
+// register file handling route above other routes 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // register stuff router with app
 app.use('/api/stuff', stuffRoutes);

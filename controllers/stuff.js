@@ -5,7 +5,7 @@ exports.createThing = (req, res, next) => {
     req.body.thing = JSON.parse(req.body.thing);
     const url = req.protocol + '://' + req.get('host');
     const thing = new Thing({
-        title: req.body.thing.Errortitle,
+        title: req.body.thing.title,
         description: req.body.thing.description,
         imageUrl: url + '/images/' + req.file.filename,
         price: req.body.thing.price,
