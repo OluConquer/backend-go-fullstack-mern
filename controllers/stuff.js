@@ -56,6 +56,17 @@ exports.modifyThing = (req, res, next) => {
 
 // Deleting an Existing Thing
 exports.deleteThing = (req, res, next) => {
+    // check the userId of the thing against the Id of the user making the request to ensure only yhe owner of a thing can delete it!
+    Thing.findOne({_id: req.params.id})
+    .then((thing) => {
+        if(!thing) {
+            return res.status(404).json({error: new Error('Thing not found!')});
+        }
+        if (thing.userId !== req.auth.userId) {
+            res.status(401).json({error: new Error('unauthorized request!')});
+        }
+    });
+
     Thing.deleteOne({_id: req.params.id})
     .then( () => {
         res.status(200).json({message: 'Deleted!'});
