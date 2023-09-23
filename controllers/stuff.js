@@ -84,7 +84,7 @@ exports.deleteThing = (req, res, next) => {
             res.status(401).json({error: new Error('unauthorized request!')});
         }
 
-        fs.unlink('images' + filename, () => {
+        fs.unlink('images/' + filename, () => {
             Thing.deleteOne({_id: req.params.id})
             .then( () => {
                 res.status(200).json({message: 'Deleted!'});
