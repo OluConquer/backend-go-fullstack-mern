@@ -27,7 +27,7 @@ mongoose.connect('mongodb+srv://oluconquer:kFnpRl3DhSFIUbK5@oluconquer.jyksbsn.m
     console.error(error);
 });
 
-// register file handling route above other routes 
+// register image handling route above other routes 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // register stuff router with app
