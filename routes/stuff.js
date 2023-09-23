@@ -16,7 +16,7 @@ router.post('/', auth, multer, stuffCtrl.createThing),
 router.get('/:id', auth, stuffCtrl.getOneThing);
 
 // Updating an Existing Thing
-router.put('/:id', auth, stuffCtrl.modifyThing);
+router.put('/:id', auth, multer, stuffCtrl.modifyThing);
 
 // Deleting an Existing Thing
 router.delete('/:id', auth, stuffCtrl.deleteThing);
